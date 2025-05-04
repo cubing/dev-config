@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "lib": ["es2022", "DOM"],
+    "target": "es2022",
+    "module": "es2022",
+    "moduleResolution": "bundler",
+
+    "outDir": "dist/types",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+
+    "verbatimModuleSyntax": true,
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "strictNullChecks": true
+  }
+}
