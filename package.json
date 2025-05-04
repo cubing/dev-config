@@ -1,6 +1,6 @@
 {
   "name": "@cubing/dev-config",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "dependencies": {
     "esbuild": "^0.25.3"
   },
