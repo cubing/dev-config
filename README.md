@@ -1,15 +1,49 @@
-# dev-config
+## `@cubing/dev-config`
 
-To install dependencies:
+### Usage
 
-```bash
-bun install
+### `es2022-types`
+
+### Check types
+
+```jsonc
+// tsconfig.json
+{
+  "extends": "./node_modules/@cubing/dev-config/ts/es2022-types/tsconfig.json",
+  "include": ["./src/"]
+}
 ```
 
-To run:
-
-```bash
-bun run index.ts
+```shell
+npx tsc --noEmit --project . # using node
+bun x tsc --noEmit --project . # using bun
 ```
 
-This project was created using `bun init` in bun v1.2.11. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+### Build types
+
+```jsonc
+// tsconfig.json
+{
+  "extends": "./node_modules/@cubing/dev-config/ts/es2022-types/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist/lib/types"
+  },
+  "include": ["./src/"]
+}
+```
+
+```shell
+npx tsc --project . # using node
+bun x tsc --project . # using bun
+```
+
+## No DOM
+
+Use the `no-dom` variant instead:
+
+```jsonc
+// tsconfig.json
+{
+  "extends": "./node_modules/@cubing/dev-config/ts/es2022-types/no-dom/tsconfig.json"
+}
+```
