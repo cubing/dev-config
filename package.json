@@ -11,5 +11,9 @@
     "./esbuild/es2022": {
       "import": "./esbuild/es2022/index.ts"
     }
-  }
+  },
+  "files": [
+    "./esbuild/",
+    "./ts/"
+  ]
 }
