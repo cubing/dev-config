@@ -1,4 +1,15 @@
 {
   "name": "@cubing/dev-config",
-  "version": "0.1.1"
+  "version": "0.1.1",
+  "dependencies": {
+    "esbuild": "^0.25.3"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4"
+  },
+  "exports": {
+    "./esbuild/es2022": {
+      "import": "./esbuild/es2022/index.ts"
+    }
+  }
 }

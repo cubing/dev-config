@@ -1,8 +1,21 @@
-## `@cubing/dev-config`
+# `@cubing/dev-config`
 
-### Usage
+## Usage
 
-### `es2022-types`
+### `esbuild`
+
+```js
+import { es2022 } from "@cubing/dev-config/esbuild/es2022";
+import { build } from "esbuild";
+
+await build({
+  ...es2022,
+  entryPoints: ["src/index.ts"],
+  outdir: "./dist/lib/",
+});
+```
+
+### TypeScript
 
 ### Check types
 

@@ -9,7 +9,7 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "verbatimModuleSyntax": true,
-    
+
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "noImplicitOverride": true,

@@ -13,3 +13,11 @@ clean:
 .PHONY: reset
 reset: clean
 	rm -rf ./node_modules
+
+.PHONY: lint
+lint:
+	bun x @biomejs/biome check
+
+.PHONY: format
+format:
+	bun x @biomejs/biome check --write
