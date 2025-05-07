@@ -10,7 +10,7 @@ import { build } from "esbuild";
 
 await build({
   ...es2022,
-  entryPoints: ["src/index.ts"],
+  entryPoints: ["./src/index.ts"],
   outdir: "./dist/lib/",
 });
 ```

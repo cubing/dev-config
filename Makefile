@@ -1,3 +1,7 @@
+.PHONY: build
+build: setup
+	bun run ./script/build-esbuild-config.ts
+
 .PHONY: setup
 setup:
 	bun install --frozen-lockfile
@@ -8,7 +12,7 @@ publish:
 
 .PHONY: clean
 clean:
-	# no-op
+	rm -rf ./esbuild
 
 .PHONY: reset
 reset: clean
@@ -21,3 +25,6 @@ lint:
 .PHONY: format
 format:
 	bun x @biomejs/biome check --write
+
+.PHONY: prepublishOnly
+prepublishOnly: clean build

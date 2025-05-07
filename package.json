@@ -5,12 +5,18 @@
     "esbuild": "^0.25.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4"
+    "@biomejs/biome": "^1.9.4",
+    "@types/bun": "^1.2.12",
+    "typescript": "^5.8.3"
   },
   "exports": {
     "./esbuild/es2022": {
-      "import": "./esbuild/es2022/index.ts"
+      "types": "./esbuild/es2022/index.d.ts",
+      "import": "./esbuild/es2022/index.js"
     }
+  },
+  "scripts": {
+    "prepublishOnly": "make prepublishOnly"
   },
   "files": [
     "./esbuild/",
