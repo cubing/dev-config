@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../src/esbuild/es2022/index.ts"],
-  "sourcesContent": ["import type { BuildOptions } from \"esbuild\";\n\nexport const es2022 = {\n  format: \"esm\",\n  target: \"es2022\",\n\n  bundle: true,\n  splitting: true,\n\n  chunkNames: \"chunks/[name]-[hash]\",\n  sourcemap: true,\n\n  packages: \"external\",\n} as const satisfies BuildOptions;\n"],
-  "mappings": ";AAEO,IAAM,SAAS;AAAA,EACpB,QAAQ;AAAA,EACR,QAAQ;AAAA,EAER,QAAQ;AAAA,EACR,WAAW;AAAA,EAEX,YAAY;AAAA,EACZ,WAAW;AAAA,EAEX,UAAU;AACZ;",
-  "names": []
-}

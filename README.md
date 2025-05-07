@@ -5,11 +5,12 @@
 ### `esbuild`
 
 ```js
-import { es2022 } from "@cubing/dev-config/esbuild/es2022";
+// Or use `es2022Lib`
+import { es2022App } from "@cubing/dev-config/esbuild/es2022";
 import { build } from "esbuild";
 
 await build({
-  ...es2022,
+  ...es2022App({ dev: true }),
   entryPoints: ["./src/index.ts"],
   outdir: "./dist/lib/",
 });

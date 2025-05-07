@@ -1,6 +1,6 @@
 import type { BuildOptions } from "esbuild";
 
-export const es2022 = {
+const common = {
   format: "esm",
   target: "es2022",
 
@@ -9,6 +9,19 @@ export const es2022 = {
 
   chunkNames: "chunks/[name]-[hash]",
   sourcemap: true,
-
-  packages: "external",
 } as const satisfies BuildOptions;
+
+export function es2022App(options?: { dev?: boolean }): BuildOptions {
+  return {
+    ...common,
+    minify: !options?.dev,
+  };
+}
+
+export function es2022Lib(): BuildOptions {
+  return {
+    ...es2022App,
+
+    packages: "external",
+  };
+}
