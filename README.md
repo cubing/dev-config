@@ -4,6 +4,14 @@
 
 ### `esbuild`
 
+```shell
+# using node
+npm install --save-dev esbuild @cubing/dev-config
+
+# using bun
+bun add esbuild @cubing/dev-config
+```
+
 ```js
 // Or use `es2022Lib`
 import { es2022App } from "@cubing/dev-config/esbuild/es2022";
@@ -44,7 +52,7 @@ bun x @biomejs/biome check
 
 ### TypeScript
 
-### Check types
+#### Check types
 
 ```jsonc
 // tsconfig.json
@@ -55,11 +63,16 @@ bun x @biomejs/biome check
 ```
 
 ```shell
-npx tsc --noEmit --project . # using node
-bun x tsc --noEmit --project . # using bun
+# using node
+npm install --save-dev typescript @cubing/dev-config
+npx tsc --noEmit --project .
+
+# using bun
+bun add --dev typescript @cubing/dev-config
+bun x tsc --noEmit --project .
 ```
 
-### Build types
+#### Build types
 
 ```jsonc
 // tsconfig.json
@@ -73,11 +86,16 @@ bun x tsc --noEmit --project . # using bun
 ```
 
 ```shell
-npx tsc --project . # using node
-bun x tsc --project . # using bun
+# using node
+npm install --save-dev typescript @cubing/dev-config
+npx tsc --project .
+
+# using bun
+bun add --dev typescript @cubing/dev-config
+bun x tsc --project .
 ```
 
-## No DOM
+#### No DOM
 
 Use the `no-dom` variant instead:
 
