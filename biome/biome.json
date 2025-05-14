@@ -1,0 +1,22 @@
+{
+  "$schema": "../node_modules/@biomejs/biome/configuration_schema.json",
+  "formatter": {
+    "indentStyle": "space",
+    "indentWidth": 2
+  },
+  "linter": {
+    "rules": {
+      "style": {
+        "useBlockStatements": "error"
+      },
+      "correctness": {
+        "noUnusedImports": "error"
+      }
+    }
+  },
+  "vcs": {
+    "clientKind": "git",
+    "enabled": true,
+    "useIgnoreFile": true
+  }
+}

@@ -20,6 +20,7 @@
     "prepublishOnly": "make prepublishOnly"
   },
   "files": [
+    "./biome/",
     "./esbuild/",
     "./ts/"
   ]

@@ -16,6 +16,32 @@ await build({
 });
 ```
 
+### Biome
+
+```jsonc
+// biome.json
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "extends": ["./node_modules/@cubing/dev-config/biome/biome.json"],
+  "files": {
+    "ignore": [,
+      "./dist",
+      "./package.json"
+    ]
+  }
+}
+```
+
+```shell
+# using node
+npm install --save-dev @biomejs/biome @cubing/dev-config
+npx @biomejs/biome check
+
+# using bun
+bun add @biomejs/biome @cubing/dev-config
+bun x @biomejs/biome check
+```
+
 ### TypeScript
 
 ### Check types
