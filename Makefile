@@ -2,6 +2,13 @@
 build: setup
 	bun run ./script/build-esbuild-config.ts
 
+.PHONY: test
+test: test-tsc lint
+
+.PHONY: test-tsc
+test-tsc:
+	bun x tsc --project .
+
 .PHONY: setup
 setup:
 	bun install --frozen-lockfile
