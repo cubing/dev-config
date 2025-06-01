@@ -105,3 +105,12 @@ Use the `no-dom` variant instead:
   "extends": "./node_modules/@cubing/dev-config/ts/es2022-types/no-dom/tsconfig.json"
 }
 ```
+
+### `es2024`
+
+The following are also available:
+
+- `./node_modules/@cubing/dev-config/ts/es2024-types/tsconfig.json`
+- `./node_modules/@cubing/dev-config/ts/es2024-types/no-dom/tsconfig.json`
+
+This is useful for features like `Promise.withResolvers(…)`.
