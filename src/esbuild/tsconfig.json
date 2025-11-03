@@ -1,9 +1,7 @@
 {
   "extends": "../../ts/es2022-types/tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../esbuild/es2022",
-    // *sigh*
-    "skipLibCheck": true
+    "outDir": "../../esbuild/es2022"
   },
   "files": ["./es2022/index.ts"]
 }
