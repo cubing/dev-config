@@ -3,11 +3,15 @@ build: setup
 	bun run ./script/build-esbuild-config.ts
 
 .PHONY: test
-test: test-tsc lint
+test: test-tsc check-dependency-constraints
 
 .PHONY: test-tsc
 test-tsc:
 	bun x tsc --project .
+
+.PHONY: check-dependency-constraints
+check-dependency-constraints:
+	bun run ./script/check-dependency-constraints.ts
 
 .PHONY: setup
 setup:

@@ -12,6 +12,7 @@ jobs:
       - run: make setup
       - run: make lint
       - run: make test-tsc
+      - run: make check-dependency-constraints
 
   build:
     runs-on: ubuntu-latest
