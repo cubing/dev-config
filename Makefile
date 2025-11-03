@@ -3,11 +3,7 @@ build: setup
 	bun run ./script/build-esbuild-config.ts
 
 .PHONY: test
-test: test-tsc check-dependency-constraints
-
-.PHONY: test-tsc
-test-tsc:
-	bun x tsc --project .
+test: check-dependency-constraints
 
 .PHONY: check-dependency-constraints
 check-dependency-constraints:
@@ -32,6 +28,7 @@ reset: clean
 .PHONY: lint
 lint:
 	bun x @biomejs/biome check
+	bun x tsc --project .
 
 .PHONY: format
 format:
