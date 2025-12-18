@@ -2,6 +2,13 @@
 build: setup
 	bun run ./script/build-esbuild-config.ts
 
+.PHONY: check-package-json
+check-package-json: build
+	./bin/package.json.ts check
+
+.PHONY: check
+check: lint test build check-package-json
+
 .PHONY: test
 test: check-dependency-constraints
 
@@ -35,4 +42,4 @@ format:
 	bun x @biomejs/biome check --write
 
 .PHONY: prepublishOnly
-prepublishOnly: clean build
+prepublishOnly: clean build check-package-json

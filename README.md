@@ -114,3 +114,13 @@ The following are also available:
 - `./node_modules/@cubing/dev-config/ts/es2024-types/no-dom/tsconfig.json`
 
 This is useful for features like `Promise.withResolvers(…)`.
+
+### Checking `package.json` for a project
+
+Run as follows:
+
+```shell
+bun x --package @cubing/dev-config package.json check
+```
+
+This checks both syntax and the presence of exports (and similar).

@@ -2,5 +2,6 @@
   "extends": "./ts/es2022-types/no-dom/tsconfig.json",
   "compilerOptions": {
     "noEmit": true
-  }
+  },
+  "exclude": ["./esbuild/"]
 }
