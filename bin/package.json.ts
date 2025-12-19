@@ -41,7 +41,6 @@ It also assumes certain conventions about package structure and maintenance.
 
 */
 
-// TODO: support "format" command that corrects some things.
 // TODO: Schema validation.
 
 console.log("Parsing `package.json`:");
