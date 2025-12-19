@@ -260,8 +260,11 @@ function field<T>(
     optional?: boolean;
     additionalChecks?: { [requirementMessage: string]: (t: T) => boolean };
     skipPrintingSuccess?: boolean;
+    mustBePopulatedMessage?: string;
   },
 ) {
+  const mustBePopulatedMessage = () =>
+    options?.mustBePopulatedMessage ?? "Field must be populated.";
   const { breadcrumbString, maybeValue } = traverse(breadcrumbs);
   if (!maybeValue) {
     if (options?.optional) {
@@ -270,7 +273,7 @@ function field<T>(
       }
       return;
     } else {
-      console.log(`❌ ${breadcrumbString} — Must be present.`);
+      console.log(`❌ ${breadcrumbString} — ${mustBePopulatedMessage()}`);
       exitCode = 1;
       return;
     }
@@ -294,9 +297,11 @@ function field<T>(
     }
   } else {
     if (category === "undefined") {
-      console.log(`❌ ${breadcrumbString} — Must be present.`);
+      console.log(`❌ ${breadcrumbString} — ${mustBePopulatedMessage()}.`);
     } else if (type === "undefined") {
-      console.log(`❌ ${breadcrumbString} — Present (but must not be).`);
+      console.log(
+        `❌ ${breadcrumbString} — Field is populated (but must not be).`,
+      );
     } else {
       if (Array.isArray(type)) {
         console.log(
@@ -313,7 +318,7 @@ function field<T>(
   }
 }
 
-function mustNotBePresent(breadcrumbs: Breadcrumbs) {
+function mustNotBePopulated(breadcrumbs: Breadcrumbs) {
   const { breadcrumbString, maybeValue } = traverse(breadcrumbs);
   if (maybeValue) {
     console.log(`❌ ${breadcrumbString} — Must not be present.`);
@@ -393,6 +398,19 @@ field(["type"], "string", {
     'Type must be `"module"`.': (type: string) => type === "module",
   },
 });
+if ("main" in packageJSON || "types" in packageJSON) {
+  field(["main"], "string", {
+    mustBePopulatedMessage: 'Must be populated if "types" is populated.',
+  });
+  field(["types"], "string", {
+    mustBePopulatedMessage: 'Must be populated if "main" is populated.',
+  });
+} else {
+  console.log("☑️ .main");
+  console.log("☑️ .types");
+}
+mustNotBePopulated(["module"]);
+mustNotBePopulated(["browser"]);
 field(["exports"], "object");
 field(["bin"], "object", { optional: true });
 field(["dependencies"], "object", { optional: true });
@@ -407,15 +425,6 @@ field(["files"], "array");
 field(["scripts"], "object");
 // Set to `"# no-op"` if needed.
 field(["scripts", "prepublishOnly"], "string");
-if ("main" in packageJSON || "types" in packageJSON) {
-  field(["main"], "string");
-  field(["types"], "string");
-} else {
-  console.log("☑️ .main");
-  console.log("☑️ .types");
-}
-mustNotBePresent(["module"]);
-mustNotBePresent(["browser"]);
 
 console.log("Checking paths of binaries and exports:");
 
