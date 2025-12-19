@@ -155,7 +155,7 @@ try {
       break;
     }
     default:
-      throw new Error("Invalid command.") as never;
+      throw new Error("Invalid subcommand.") as never;
   }
 }
 
@@ -485,7 +485,7 @@ function checkPath(
               break;
             }
             default:
-              throw new Error("Invalid command.") as never;
+              throw new Error("Invalid subcommand.") as never;
           }
         }
       }
@@ -520,14 +520,15 @@ checkPath(["types"], { expectPrefix: ResolutionPrefix.Relative });
 checkPath(["module"], { expectPrefix: ResolutionPrefix.Relative });
 checkPath(["browser"], { expectPrefix: ResolutionPrefix.Relative });
 
-if (packageJSON.exports) {
-  for (const [exportPath, value] of Object.entries(packageJSON.exports)) {
+const { exports } = packageJSON;
+if (exports) {
+  for (const [subpath, value] of Object.entries(exports)) {
     if (!value) {
       // biome-ignore lint/complexity/noUselessContinue: Explicit control flow.
       continue;
     } else if (typeof value === "string") {
       // TODO: error?
-      checkPath(["exports", [exportPath]], {
+      checkPath(["exports", [subpath]], {
         expectPrefix: ResolutionPrefix.Relative,
       });
     } else if (value === null) {
@@ -542,24 +543,69 @@ if (packageJSON.exports) {
 
       checks.push(
         (async () => {
-          const { breadcrumbString } = traverse(["exports", [exportPath]]);
+          const { breadcrumbString } = traverse(["exports", [subpath]]);
+          const fixingLines = [];
           const orderingErrorLines = [];
           /**
            * https://nodejs.org/api/packages.html#conditional-exports
            */
+          let updateKeys = false;
           if (keys.includes("types")) {
             if (keys[0] !== "types") {
-              orderingErrorLines.push(
-                `  ↪ "types" must be the first export if present.`,
-              );
+              switch (subcommand) {
+                case "check": {
+                  orderingErrorLines.push(
+                    `  ↪ "types" must be the first export if present — 📝 fixable!`,
+                  );
+                  break;
+                }
+                case "format": {
+                  fixingLines.push(
+                    `  ↪ "types" must be the first export if present — 📝 fixing!`,
+                  );
+                  keys.splice(keys.indexOf("types"), 1);
+                  keys.splice(0, 0, "types");
+                  updateKeys = true;
+                  break;
+                }
+                default:
+                  throw new Error("Invalid subcommand.") as never;
+              }
             }
           }
           if (keys.includes("default")) {
             if (keys.at(-1) !== "default") {
-              orderingErrorLines.push(
-                `  ↪ "default" must be the last export if present.`,
-              );
+              switch (subcommand) {
+                case "check": {
+                  orderingErrorLines.push(
+                    `  ↪ "default" must be the last export if present — 📝 fixable!`,
+                  );
+                  break;
+                }
+                case "format": {
+                  fixingLines.push(
+                    `  ↪ "default" must be the last export if present — 📝 fixing!`,
+                  );
+                  keys.splice(keys.indexOf("default"), 1);
+                  keys.push("default");
+                  updateKeys = true;
+                  break;
+                }
+                default:
+                  throw new Error("Invalid subcommand.") as never;
+              }
             }
+          }
+          if (updateKeys) {
+            // TODO: avoid type wrangling.
+            const newConditionalExports: Record<string, string> = {};
+            for (const key of keys) {
+              newConditionalExports[key] = (value as Record<string, string>)[
+                key
+              ];
+            }
+            (exports as Record<string, Record<string, string>>)[subpath] =
+              newConditionalExports;
           }
           for (const key of keys) {
             // Note `"require"` is *emphatically not allowed*.
@@ -569,19 +615,26 @@ if (packageJSON.exports) {
               );
             }
           }
-          if (orderingErrorLines) {
-            exitCode = 0;
+          if (orderingErrorLines.length > 0) {
+            exitCode = 1;
             return [
               `❌ ${breadcrumbString} — Invalid keys:`,
               ...orderingErrorLines,
             ].join("\n");
           } else {
-            return `✅ ${breadcrumbString} — Key set and ordering is okay..`;
+            if (fixingLines.length > 0) {
+              return [
+                `✅ ${breadcrumbString} — Fixing key ordering:`,
+                ...fixingLines,
+              ].join("\n");
+            } else {
+              return `✅ ${breadcrumbString} — Key set and ordering is okay.`;
+            }
           }
         })(),
       );
       for (const secondaryKey of keys) {
-        checkPath(["exports", [exportPath], secondaryKey], {
+        checkPath(["exports", [subpath], secondaryKey], {
           expectPrefix: ResolutionPrefix.Relative,
         });
       }
