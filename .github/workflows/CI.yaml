@@ -21,4 +21,4 @@ jobs:
       - uses: oven-sh/setup-bun@v1
       - run: make setup
       - run: make build
-      - run: make check-package-json
+      - run: make check-package.json
