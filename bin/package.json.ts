@@ -642,7 +642,7 @@ if (exports) {
                 ...fixingLines,
               ].join("\n");
             } else {
-              return `✅ ${breadcrumbString} — Key set and ordering is okay.`;
+              return `✅ ${breadcrumbString} — Key set and ordering is OK.`;
             }
           }
         })(),
