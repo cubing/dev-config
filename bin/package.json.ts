@@ -255,7 +255,7 @@ function traverse<T>(
 
 function field<T>(
   breadcrumbs: Breadcrumbs,
-  type: Categorization,
+  type: Categorization | Categorization[],
   options?: {
     optional?: boolean;
     additionalChecks?: { [requirementMessage: string]: (t: T) => boolean };
@@ -277,8 +277,9 @@ function field<T>(
   }
   const [value] = maybeValue;
 
+  const typeArray = Array.isArray(type) ? type : [type];
   const category = categorize(value);
-  if (category === type) {
+  if (typeArray.includes(category)) {
     for (const [failureMessage, fn] of Object.entries(
       options?.additionalChecks ?? {},
     )) {
@@ -297,9 +298,15 @@ function field<T>(
     } else if (type === "undefined") {
       console.log(`❌ ${breadcrumbString} — Present (but must not be).`);
     } else {
-      console.log(
-        `❌ ${breadcrumbString} — Does not match expected type: ${type}`,
-      );
+      if (Array.isArray(type)) {
+        console.log(
+          `❌ ${breadcrumbString} — Does not match an expected type: ${type.join(", ")}`,
+        );
+      } else {
+        console.log(
+          `❌ ${breadcrumbString} — Does not match expected type: ${type}`,
+        );
+      }
     }
     exitCode = 1;
     return;
@@ -327,10 +334,8 @@ field(["version"], "string", {
 field(["homepage"], "string", { optional: true });
 field(["description"], "string");
 // TODO: format author.
-if (categorize(packageJSON["author"]) === "string") {
-  field(["author"], "object");
-} else {
-  field(["author"], "object");
+field(["author"], ["string", "object"]);
+if (categorize(packageJSON["author"]) === "object") {
   field(["author", "name"], "string");
   field(["author", "email"], "string");
   field(["author", "url"], "string", {
