@@ -500,14 +500,14 @@ function checkPath(
       // TODO: allow folders (with a required trailing slash)?
       if (!(await resolvedPath.existsAsFile())) {
         exitCode = 1;
-        return `❌ ${breadcrumbString} — Missing — ${value}`;
+        return `❌ ${breadcrumbString} — Path is not present on disk. — ${value}`;
       }
       if (options.mustBeExecutable) {
         if (!((await resolvedPath.stat()).mode ^ constants.X_OK)) {
           // This is not considered fixable because the binary may be the output
           // of a build process. In that case, the build process is responsible
           // for marking it as executable.
-          return `❌ ${breadcrumbString} — Must be executable — ${value}`;
+          return `❌ ${breadcrumbString} — File at path must be executable — ${value}`;
         }
       }
       return `✅ ${breadcrumbString} — OK — ${value}`;
