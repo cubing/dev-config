@@ -50,6 +50,12 @@ bun add @biomejs/biome @cubing/dev-config
 bun x @biomejs/biome check
 ```
 
+Add to a project using [`repo`](https://github.com/lgarron/repo):
+
+```shell
+repo boilerplate biome add # Or invoke using `npx repo …` / `bun x repo …`
+```
+
 ### TypeScript
 
 #### Check types
@@ -70,6 +76,12 @@ npx tsc --noEmit --project .
 # using bun
 bun add --dev typescript @cubing/dev-config
 bun x tsc --noEmit --project .
+```
+
+Add to a project using [`repo`](https://github.com/lgarron/repo):
+
+```shell
+repo boilerplate tsconfig add # Or invoke using `npx repo …` / `bun x repo …`
 ```
 
 #### Build types
@@ -95,6 +107,12 @@ bun add --dev typescript @cubing/dev-config
 bun x tsc --project .
 ```
 
+Add to a project using [`repo`](https://github.com/lgarron/repo):
+
+```shell
+repo boilerplate tsconfig add # Or invoke using `npx repo …` / `bun x repo …`
+```
+
 #### No DOM
 
 Use the `no-dom` variant instead:
@@ -106,6 +124,12 @@ Use the `no-dom` variant instead:
 }
 ```
 
+Add to a project using [`repo`](https://github.com/lgarron/repo):
+
+```shell
+repo boilerplate tsconfig add --no-dom # Or invoke using `npx repo …` / `bun x repo …`
+```
+
 ### `es2024`
 
 The following are also available:
@@ -114,6 +138,13 @@ The following are also available:
 - `./node_modules/@cubing/dev-config/ts/es2024-types/no-dom/tsconfig.json`
 
 This is useful for features like `Promise.withResolvers(…)`.
+
+Add to a project using [`repo`](https://github.com/lgarron/repo):
+
+```shell
+repo boilerplate tsconfig add --module es2022 # Or invoke using `npx repo …` / `bun x repo …`
+repo boilerplate tsconfig add --no-dom --module es2022 # Or invoke using `npx repo …` / `bun x repo …`
+```
 
 ### Checking `package.json` for a project
 

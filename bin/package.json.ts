@@ -432,8 +432,11 @@ field(["scripts", "prepublishOnly"], "string");
 console.log("Checking paths of binaries and exports:");
 
 const tempDir = await Path.makeTempDir();
-await using _ = {
-  [Symbol.asyncDispose]: () => tempDir.rm_rf(),
+await using tempDirDisposable = {
+  [Symbol.asyncDispose]: async () => {
+    console.log("Disposing…");
+    await tempDir.rm_rf();
+  },
 };
 const extractionDir = await tempDir.join("extracted").mkdir();
 // TODO: is there a 100% reliable way to test against paths that *will* be packed?
