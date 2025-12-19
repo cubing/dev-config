@@ -331,7 +331,7 @@ console.log("Checking presence and type of fields:");
 field(["name"], "string");
 field(["version"], "string", {
   additionalChecks: {
-    "Version cannot be parsed.": (version: string) =>
+    "Version must parse successfully.": (version: string) =>
       semver.order(version, version) === 0,
   },
 });
