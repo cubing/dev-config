@@ -526,6 +526,7 @@ if (packageJSON.exports) {
       // biome-ignore lint/complexity/noUselessContinue: Explicit control flow.
       continue;
     } else if (typeof value === "string") {
+      // TODO: error?
       checkPath(["exports", [exportPath]], {
         expectPrefix: ResolutionPrefix.Relative,
       });
@@ -537,7 +538,49 @@ if (packageJSON.exports) {
         "❌ .exports — Must use an object (instead of an array).",
       );
     } else {
-      for (const secondaryKey of Object.keys(value as Record<string, string>)) {
+      const keys = Object.keys(value as Record<string, string>);
+
+      checks.push(
+        (async () => {
+          const { breadcrumbString } = traverse(["exports", [exportPath]]);
+          const orderingErrorLines = [];
+          /**
+           * https://nodejs.org/api/packages.html#conditional-exports
+           */
+          if (keys.includes("types")) {
+            if (keys[0] !== "types") {
+              orderingErrorLines.push(
+                `  ↪ "types" must be the first export if present.`,
+              );
+            }
+          }
+          if (keys.includes("default")) {
+            if (keys.at(-1) !== "default") {
+              orderingErrorLines.push(
+                `  ↪ "default" must be the last export if present.`,
+              );
+            }
+          }
+          for (const key of keys) {
+            // Note `"require"` is *emphatically not allowed*.
+            if (!["types", "import", "default"].includes(key)) {
+              orderingErrorLines.push(
+                `  ↪ Key must not be present: ${JSON.stringify(key)}`,
+              );
+            }
+          }
+          if (orderingErrorLines) {
+            exitCode = 0;
+            return [
+              `❌ ${breadcrumbString} — Invalid keys:`,
+              ...orderingErrorLines,
+            ].join("\n");
+          } else {
+            return `✅ ${breadcrumbString} — Key set and ordering is okay..`;
+          }
+        })(),
+      );
+      for (const secondaryKey of keys) {
         checkPath(["exports", [exportPath], secondaryKey], {
           expectPrefix: ResolutionPrefix.Relative,
         });
