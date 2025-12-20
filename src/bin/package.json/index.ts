@@ -683,7 +683,7 @@ if (subcommand === "format") {
   // TODO: support trailing space in `path-class`.
   await PACKAGE_JSON_PATH.write(`${JSON.stringify(packageJSON, null, "  ")}\n`);
   console.log(PACKAGE_JSON_PATH.path);
-  console.log("📝 Running `npm pkg fix.");
+  console.log("📝 Running `npm pkg fix`.");
   await new PrintableShellCommand("npm", ["pkg", "fix"])
     .print({ argumentLineWrapping: "inline" })
     .spawn().success;
