@@ -7,7 +7,7 @@ check-package.json: build
 	bun run ./bin/package.json/index.js check
 
 .PHONY: check
-check: lint test build check-package.json
+check: clean lint test build check-package.json
 
 .PHONY: test
 test: check-dependency-constraints
@@ -42,4 +42,4 @@ format:
 	bun x @biomejs/biome check --write
 
 .PHONY: prepublishOnly
-prepublishOnly: clean build check-package.json
+prepublishOnly: clean check build
