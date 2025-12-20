@@ -17,6 +17,9 @@
     "./esbuild/es2022": {
       "types": "./esbuild/es2022/index.d.ts",
       "import": "./esbuild/es2022/index.js"
+    },
+    "./check-allowed-imports": {
+      "default": "./lib/check-allowed-imports/index.ts"
     }
   },
   "bin": {
@@ -37,6 +40,7 @@
   "files": [
     "./biome/",
     "./esbuild/",
+    "./lib",
     "./ts/"
   ],
   "scripts": {
