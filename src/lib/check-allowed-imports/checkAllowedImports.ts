@@ -5,7 +5,7 @@ import {
   type Metafile,
   type Plugin,
 } from "esbuild";
-import { es2022Lib } from "../../src/esbuild/es2022";
+import { es2022Lib } from "../../esbuild/es2022";
 
 /**
  * Note:

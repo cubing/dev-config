@@ -1,0 +1,7 @@
+{
+  "extends": "../ts/es2022-types/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../"
+  },
+  "files": ["./esbuild/es2022/index.ts", "./lib/check-allowed-imports/index.ts"]
+}

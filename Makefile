@@ -1,6 +1,6 @@
 .PHONY: build
 build: setup
-	bun run ./script/build-esbuild-config.ts
+	bun run ./script/build.ts
 
 .PHONY: check-package.json
 check-package.json: build
@@ -26,11 +26,11 @@ publish:
 
 .PHONY: clean
 clean:
-	rm -rf ./esbuild
+	rm -rf ./chunks/ ./esbuild/ ./lib/
 
 .PHONY: reset
 reset: clean
-	rm -rf ./node_modules
+	rm -rf ./node_modules/
 
 .PHONY: lint
 lint:
