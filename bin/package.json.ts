@@ -695,4 +695,6 @@ if (subcommand === "format") {
   console.log();
 }
 
+await tempDirDisposable[Symbol.asyncDispose]();
+
 exit(exitCode);
