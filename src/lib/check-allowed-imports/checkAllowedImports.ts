@@ -5,6 +5,7 @@ import {
   type Metafile,
   type Plugin,
 } from "esbuild";
+import { Path } from "path-class";
 import { es2022Lib } from "../../esbuild/es2022";
 
 /**
@@ -52,6 +53,8 @@ export async function checkAllowedImports(
       entryPoints,
       plugins: [plugin],
       ...options?.overrideEsbuildOptions,
+      // Bogus `outdir` to avoid an error.
+      outdir: (await Path.makeTempDir()).path,
       write: false,
       metafile: true,
     });
