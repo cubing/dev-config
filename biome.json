@@ -2,6 +2,6 @@
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "extends": ["./biome/biome.json"],
   "files": {
-    "includes": ["**", "!chunks", "!esbuild", "!lib", "!package.json"]
+    "includes": ["**", "!bin", "!chunks", "!esbuild", "!lib", "!package.json"]
   }
 }

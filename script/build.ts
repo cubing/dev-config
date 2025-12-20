@@ -6,6 +6,7 @@ await $`bun x tsc --project ./src/`;
 await build({
   ...es2022Lib(),
   entryPoints: [
+    "./src/bin/package.json/index.ts",
     "./src/esbuild/es2022/index.ts",
     "./src/lib/check-allowed-imports/index.ts",
   ],

@@ -4,7 +4,7 @@ build: setup
 
 .PHONY: check-package.json
 check-package.json: build
-	./bin/package.json.ts check
+	bun run ./bin/package.json/index.js check
 
 .PHONY: check
 check: lint test build check-package.json
@@ -26,7 +26,7 @@ publish:
 
 .PHONY: clean
 clean:
-	rm -rf ./chunks/ ./esbuild/ ./lib/
+	rm -rf ./bin/ ./chunks/ ./esbuild/ ./lib/
 
 .PHONY: reset
 reset: clean

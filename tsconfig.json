@@ -3,5 +3,5 @@
   "compilerOptions": {
     "noEmit": true
   },
-  "exclude": ["./chunks/", "./esbuild/", "./lib/"]
+  "exclude": ["./bin/", "./chunks/", "./esbuild/", "./lib/"]
 }
