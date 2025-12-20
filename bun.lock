@@ -7,7 +7,7 @@
       "dependencies": {
         "esbuild": ">=0.25.3 && <1.0.0",
         "path-class": ">=0.10.8",
-        "printable-shell-command": "^4.0.0",
+        "printable-shell-command": "^4.0.3",
       },
       "devDependencies": {
         "@biomejs/biome": "^2.3.10",
@@ -101,7 +101,7 @@
 
     "path-class": ["path-class@0.10.8", "", { "dependencies": { "xdg-basedir": "^5.1.0" }, "peerDependencies": { "@types/node": ">=24.7.1" } }, "sha512-grm0+XkLIZLH33wkK6aJKaWYPzLEYcDKUvRz8VEaP6Sk/BaxT72PCgrLuUP8/Xh4RZvnyj1YPBYER3BPBDHksw=="],
 
-    "printable-shell-command": ["printable-shell-command@4.0.0", "", { "dependencies": { "path-class": ">=0.10.3" }, "peerDependencies": { "@types/node": ">=24.2.0" } }, "sha512-lkbGsWZCzg7LLlupezrIX9IFgfUlIl5jhh0uHCYwDt/tnAVM+dWE+FPLtEFEvK8Fx9TTjJwU6DLDL3e65X0A5w=="],
+    "printable-shell-command": ["printable-shell-command@4.0.3", "", { "dependencies": { "@types/node": ">=25.0.3", "path-class": ">=0.10.3" } }, "sha512-AnoCKmRdGH5+qghSOk5PwSfGrdFme/gF9S2WOyex/ABBVEaXLRdth7P34FBtTCkFDiuifq6CqHgf+IDepH6iDw=="],
 
     "typescript": ["typescript@5.9.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="],
 
