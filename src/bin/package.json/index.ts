@@ -398,13 +398,22 @@ field(["type"], "string", {
   },
 });
 const mainOrTypesArePopoulated = (() => {
-  if ("main" in packageJSON || "types" in packageJSON) {
+  if ("types" in packageJSON) {
     field(["main"], "string", {
-      mustBePopulatedMessage: 'Must be populated if "types" is populated.',
+      mustBePopulatedMessage: "Must be populated if `.types` is populated.",
     });
-    field(["types"], "string", {
-      mustBePopulatedMessage: 'Must be populated if "main" is populated.',
-    });
+    field(["types"], "string");
+    return true;
+  } else if ("main" in packageJSON) {
+    field(["main"], "string", {});
+    if (packageJSON["main"]?.endsWith(".js")) {
+      field(["types"], "string", {
+        mustBePopulatedMessage:
+          "Must be populated if `.main` is with a path ending in `.js`.",
+      });
+    } else {
+      console.log("☑️ .types");
+    }
     return true;
   } else {
     console.log("☑️ .main");
@@ -414,7 +423,11 @@ const mainOrTypesArePopoulated = (() => {
 })();
 mustNotBePopulated(["module"]);
 mustNotBePopulated(["browser"]);
-field(["exports"], "object", { optional: !mainOrTypesArePopoulated });
+field(["exports"], "object", {
+  optional: !mainOrTypesArePopoulated,
+  mustBePopulatedMessage:
+    "Must be populated if `.main` or `.types` are populated.",
+});
 field(["bin"], "object", { optional: true });
 field(["dependencies"], "object", { optional: true });
 field(["devDependencies"], "object", { optional: true });
