@@ -83,6 +83,7 @@ const opinionatedFieldOrder = [
   "optionalDependencies",
   "peerDependencies",
   "bundleDependencies",
+  "overrides",
   "devEngines",
   "files",
   "scripts",
