@@ -1,6 +1,6 @@
 {
   "name": "@cubing/dev-config",
-  "version": "0.8.4-dev",
+  "version": "0.9.0",
   "description": "Common dev configs for projects.",
   "author": {
     "name": "Lucas Garron",
