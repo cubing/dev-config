@@ -147,6 +147,7 @@ export async function checkAllowedImports(
     }
 
     await checkImports(metafile, allowedImports);
+    console.log("");
   }
 
   if (failure) {
