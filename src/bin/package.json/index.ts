@@ -465,7 +465,8 @@ console.log("Checking paths of binaries and exports:");
 const tempDir = await Path.makeTempDir();
 await using tempDirDisposable = {
   [Symbol.asyncDispose]: async () => {
-    console.log("Disposing temporary dir.");
+    // TODO: implement an option to keep/open the temporary dir.
+    // console.log("Disposing temporary dir.");
     await tempDir.rm_rf();
   },
 };
