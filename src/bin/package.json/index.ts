@@ -286,7 +286,7 @@ function field<T>(
     for (const [failureMessage, fn] of Object.entries(
       options?.additionalChecks ?? {},
     )) {
-      if (!fn) {
+      if (!fn(value as T)) {
         console.log(`❌ ${breadcrumbString} | ${failureMessage}`);
         exitCode = 1;
         return;
@@ -372,13 +372,30 @@ field(["license"], "string", {
 field(["repository"], "object");
 field(["repository", "type"], "string");
 const GIT_URL_PREFIX = "git+";
-const GIT_URL_SUFFIX = ".";
+const GIT_URL_SUFFIX = ".git";
 field(["repository", "url"], "string", {
   additionalChecks: {
-    [`URL must be prefixed with \`${GIT_URL_PREFIX}\`.`]: (url: string) =>
-      url.startsWith(GIT_URL_PREFIX),
-    [`URL must end with with \`.${GIT_URL_SUFFIX}\`.`]: (url: string) =>
-      url.endsWith(GIT_URL_SUFFIX),
+    [`GitHub URLs must have the approriate affixes.`]: (urlString: string) => {
+      const url = new URL(urlString.replace(/^git\+/, ""));
+      if (url.hostname === "github.com") {
+        return (
+          urlString.startsWith(GIT_URL_PREFIX) &&
+          urlString.endsWith(GIT_URL_SUFFIX)
+        );
+      }
+      return true;
+    },
+    // `npm` does not handle `git+` for Codeberg URLs in its package listing pages.
+    [`Codeberg URLs must not have affixes.`]: (urlString: string) => {
+      const url = new URL(urlString.replace(/^git\+/, ""));
+      if (url.hostname === "codeberg.org") {
+        return (
+          !urlString.startsWith(GIT_URL_PREFIX) &&
+          !urlString.endsWith(GIT_URL_SUFFIX)
+        );
+      }
+      return true;
+    },
     "URL must parse.": (url: string) => {
       try {
         new URL(url.slice());
