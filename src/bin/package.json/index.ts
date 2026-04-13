@@ -358,7 +358,7 @@ if (categorize(packageJSON["author"]) === "object") {
 }
 field(["license"], "string", {
   additionalChecks: {
-    "Must contain a non-permitted license.": (license: string) => {
+    "Must contain a permitted license.": (license: string) => {
       for (const licenseEntry of license.split(" OR ")) {
         if (!PERMITTED_LICENSES.has(licenseEntry)) {
           return false;
