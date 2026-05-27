@@ -1,3 +1,4 @@
+import { stdout } from "node:process";
 import {
   type BuildOptions,
   build,
@@ -120,7 +121,7 @@ export async function checkAllowedImports(
               importInfo.path,
             )
           ) {
-            process.stdout.write("-");
+            stdout.write("-");
             return;
           }
         }
