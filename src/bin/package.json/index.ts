@@ -239,7 +239,8 @@ function traverse<T>(
           "Missing (but expected) traversal path while setting a value",
         ) as never;
       }
-      maybeValue[0][breadcrumb] = stringifyIfPath(options.set);
+      // biome-ignore lint/suspicious/noExplicitAny: Type wrangling
+      maybeValue[0][breadcrumb] = stringifyIfPath(options.set as any);
     } else if (
       maybeValue &&
       ["array", "object"].includes(categorize(maybeValue[0])) &&
