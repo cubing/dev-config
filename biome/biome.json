@@ -8,11 +8,11 @@
   "linter": {
     "rules": {
       "nursery": {
-        "noFloatingPromises": "error",
-        "useGlobalThis": "error"
+        "noFloatingPromises": "error"
       },
       "style": {
-        "useBlockStatements": "error"
+        "useBlockStatements": "error",
+        "useGlobalThis": "error"
       },
       "correctness": {
         "noUnusedImports": "error"
