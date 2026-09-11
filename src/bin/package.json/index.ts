@@ -5,33 +5,78 @@
 import assert from "node:assert";
 import { constants } from "node:fs/promises";
 import { argv, exit } from "node:process";
+import {
+  command,
+  constant,
+  merge,
+  message,
+  object,
+  option,
+  optional,
+  or,
+  string,
+} from "@optique/core";
+import { run } from "@optique/run";
 import type { JSONSchemaForNPMPackageJsonFiles } from "@schemastore/package";
 import { semver } from "bun";
 import { Path, ResolutionPrefix, stringifyIfPath } from "path-class";
 import { PrintableShellCommand } from "printable-shell-command";
+import { packageVersion } from "../../metadata/packageVersion";
 
 // Licenses from https://github.com/cubing/infra?tab=readme-ov-file#conventions
-const PERMITTED_LICENSES = new Set([
+const DEFAULT_PERMITTED_LICENSES = new Set([
   "MPL-2.0",
   "MIT",
   "Unlicense",
   "GPL-3.0-or-later",
 ]);
 
-// TODO: proper CLI parsing once this gets more complicated.
-const subcommand: "check" | "format" = (() => {
-  const subcommand = argv[2];
-  if (!["check", "format"].includes(subcommand)) {
-    console.error("Must specify subcommand: `check` or `format`");
-    exit(1);
-  }
-  return subcommand as "check" | "format";
-})();
+function parseArgs() {
+  return run(
+    merge(
+      or(
+        command("check", object({ subcommand: constant("check") })),
+        command("format", object({ subcommand: constant("format") })),
+      ),
+      object({
+        expectLicense: optional(
+          option("--expect-license", string(), {
+            description: message`Expected license. Must be a single string that exactly matches the \`license\` field.`,
+          }),
+        ),
+      }),
+    ),
+    {
+      programName: new Path(argv[1]).basename.path,
+      description: message`Partial and opinionated linter/formatter for \`package.json\` files.`,
+      help: "option",
+      completion: {
+        option: {
+          names: ["--completions"],
+          hidden: false,
+        },
+      },
+      version: {
+        option: {
+          hidden: false,
+        },
+        value: packageVersion,
+      },
+    },
+  );
+}
+
+const { subcommand, expectLicense } = parseArgs();
+console.log(subcommand);
 
 let exitCode: number = 0;
 let foundFixableErrors: boolean = false;
 
 const PACKAGE_JSON_PATH = new Path("./package.json");
+
+const permittedLicenses = expectLicense
+  ? new Set([expectLicense])
+  : DEFAULT_PERMITTED_LICENSES;
 
 /*
 
@@ -361,7 +406,7 @@ field(["license"], "string", {
   additionalChecks: {
     "Must contain a permitted license.": (license: string) => {
       for (const licenseEntry of license.split(" OR ")) {
-        if (!PERMITTED_LICENSES.has(licenseEntry)) {
+        if (!permittedLicenses.has(licenseEntry)) {
           return false;
         }
       }

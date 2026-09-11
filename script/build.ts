@@ -1,6 +1,7 @@
 import { $ } from "bun";
 import { build } from "esbuild";
 import { es2022Lib } from "../src/esbuild/es2022";
+import { packageVersion } from "../src/metadata/packageVersion";
 
 await $`bun x tsc --project ./src/`;
 await build({
@@ -11,4 +12,5 @@ await build({
     "./src/lib/check-allowed-imports/index.ts",
   ],
   outdir: "./",
+  define: { "globalThis.PACKAGE_VERSION": JSON.stringify(packageVersion) },
 });

@@ -1,0 +1,1 @@
+Vendored from `cubing.js`.
