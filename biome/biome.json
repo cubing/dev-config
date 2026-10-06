@@ -15,7 +15,8 @@
         "useGlobalThis": "error"
       },
       "correctness": {
-        "noUnusedImports": "error"
+        "noUnusedImports": "error",
+        "useJsonImportAttributes": "error"
       }
     }
   },
