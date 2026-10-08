@@ -25,6 +25,7 @@ setup:
 
 .PHONY: publish
 publish:
+	npm whoami || npm login
 	npm publish
 
 RM_RF = bun -e 'process.argv.slice(1).map(p => process.getBuiltinModule("node:fs").rmSync(p, {recursive: true, force: true, maxRetries: 5}))' --
