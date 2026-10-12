@@ -2,6 +2,6 @@
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "extends": ["./biome/biome.json"],
   "files": {
-    "includes": ["**", "!package.json"]
+    "includes": ["**", "!package.json", "!!erasable/biome/biome.json"]
   }
 }

@@ -1,0 +1,11 @@
+{
+  "root": false,
+  "$schema": "../../node_modules/@biomejs/biome/configuration_schema.json",
+  "linter": {
+    "rules": {
+      "correctness": {
+        "useImportExtensions": "on"
+      }
+    }
+  }
+}
