@@ -497,6 +497,7 @@ field(["dependencies"], "object", { optional: true });
 field(["devDependencies"], "object", { optional: true });
 field(["optionalDependencies"], "object", { optional: true });
 field(["peerDependencies"], "object", { optional: true });
+field(["peerDependenciesMeta"], "object", { optional: true });
 field(["bundleDependencies"], "object", { optional: true });
 field(["devEngines"], "object", { optional: true });
 // TODO: check for path resolution prefix?
