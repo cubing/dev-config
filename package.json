@@ -22,10 +22,6 @@
       "types": "./esbuild/embedded-version-string/index.d.ts",
       "import": "./esbuild/embedded-version-string/index.js"
     },
-    "./optique": {
-      "types": "./optique/index.d.ts",
-      "import": "./optique/index.js"
-    },
     "./check-allowed-imports": {
       "types": "./lib/check-allowed-imports/index.d.ts",
       "default": "./lib/check-allowed-imports/index.js"
@@ -55,7 +51,6 @@
     "./biome/",
     "./chunks/",
     "./esbuild/",
-    "./optique/",
     "./erasable/",
     "./lib",
     "./ts/"

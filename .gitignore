@@ -1,7 +1,6 @@
 /bin/
 /chunks/
 /esbuild/
-/optique/
 /lib/
 /node_modules/
 /package-lock.json

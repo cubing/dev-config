@@ -4,5 +4,5 @@
     "noEmit": true,
     "types": ["bun"]
   },
-  "exclude": ["./bin/", "./chunks/", "./esbuild/", "./optique/", "./lib/"]
+  "exclude": ["./bin/", "./chunks/", "./esbuild/", "./lib/"]
 }
