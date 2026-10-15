@@ -1,6 +1,6 @@
 import { $ } from "bun";
 import { build } from "esbuild";
-import { es2022Lib } from "../src/esbuild/es2022/index";
+import { es2022Lib } from "../src/esbuild/es2022";
 import { packageVersion } from "../src/metadata/packageVersion";
 
 await $`bun x tsc --project ./src/`;
@@ -9,7 +9,6 @@ await build({
   entryPoints: [
     "./src/bin/package.json/index.ts",
     "./src/esbuild/es2022/index.ts",
-    "./src/esbuild/embedded-version-string/index.ts",
     "./src/lib/check-allowed-imports/index.ts",
   ],
   outdir: "./",

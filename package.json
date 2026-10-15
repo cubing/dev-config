@@ -18,10 +18,6 @@
       "types": "./esbuild/es2022/index.d.ts",
       "import": "./esbuild/es2022/index.js"
     },
-    "./esbuild/embedded-version-string": {
-      "types": "./esbuild/embedded-version-string/index.d.ts",
-      "import": "./esbuild/embedded-version-string/index.js"
-    },
     "./check-allowed-imports": {
       "types": "./lib/check-allowed-imports/index.d.ts",
       "default": "./lib/check-allowed-imports/index.js"
@@ -33,9 +29,8 @@
   "dependencies": {
     "@optique/core": "^1.2.6",
     "@optique/run": "^1.2.6",
-    "ergonomic-date": "^0.1.6",
     "esbuild": ">=0.28.1 && <1.0.0",
-    "path-class": ">=0.17.4",
+    "path-class": ">=0.15.1",
     "printable-shell-command": ">=4.0.3"
   },
   "devDependencies": {
