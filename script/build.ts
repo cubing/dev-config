@@ -10,6 +10,7 @@ await build({
     "./src/bin/package.json/index.ts",
     "./src/esbuild/es2022/index.ts",
     "./src/esbuild/embedded-version-string/index.ts",
+    "./src/optique/index.ts",
     "./src/lib/check-allowed-imports/index.ts",
   ],
   outdir: "./",

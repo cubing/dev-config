@@ -32,7 +32,7 @@ RM_RF = bun -e 'process.argv.slice(1).map(p => process.getBuiltinModule("node:fs
 
 .PHONY: clean
 clean:
-	${RM_RF} ./bin/ ./chunks/ ./esbuild/ ./lib/
+	${RM_RF} ./bin/ ./chunks/ ./esbuild/ ./optique/ ./lib/
 
 .PHONY: reset
 reset: clean
