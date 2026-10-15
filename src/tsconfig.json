@@ -4,5 +4,9 @@
     "outDir": "../",
     "types": ["node"]
   },
-  "files": ["./esbuild/es2022/index.ts", "./lib/check-allowed-imports/index.ts"]
+  "files": [
+    "./esbuild/es2022/index.ts",
+    "./esbuild/embedded-version-string/index.ts",
+    "./lib/check-allowed-imports/index.ts"
+  ]
 }

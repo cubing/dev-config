@@ -1,6 +1,6 @@
-/bin
-/chunks
-/esbuild
-/lib
-/node_modules
+/bin/
+/chunks/
+/esbuild/
+/lib/
+/node_modules/
 /package-lock.json
