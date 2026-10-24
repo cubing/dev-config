@@ -24,5 +24,13 @@
     "clientKind": "git",
     "enabled": true,
     "useIgnoreFile": true
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["LICENSE.md", "LICENSE-*.md"],
+      "formatter": {
+        "enabled": false
+      }
+    }
+  ]
 }
