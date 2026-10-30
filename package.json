@@ -34,7 +34,7 @@
     "printable-shell-command": ">=4.0.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.0",
+    "@biomejs/biome": "^2.6.4",
     "@schemastore/package": "^0.0.10",
     "@types/bun": "^1.4.0",
     "@types/node": "^26.3.0",
