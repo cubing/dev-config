@@ -32,10 +32,7 @@ await build({
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "extends": ["./node_modules/@cubing/dev-config/biome/biome.json"],
   "files": {
-    "ignore": [
-      "./dist",
-      "./package.json"
-    ]
+    "ignore": ["./dist", "./package.json"]
   }
 }
 ```
