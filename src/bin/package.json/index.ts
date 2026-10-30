@@ -521,15 +521,24 @@ const extractionDir = await tempDir.join("extracted").mkdir();
 // TODO: is there a 100% reliable way to test against paths that *will* be packed?
 // Note that this has to take into account `.gitignore`, `.npmignore`, and `"files"` — with globs and excludes.
 // For now, we print the command to make it clear that some heavy lifting is going on (and that it's not our fault that it's slow).
-const data: { filename: string }[] = await new PrintableShellCommand("npm", [
-  "pack",
-  "--json",
-  "--ignore-scripts",
-  ["--pack-destination", tempDir],
-])
-  .print()
-  .json();
-const tgzPath = tempDir.join(data[0].filename);
+const data: { filename: string }[] | Record<string, { filename: string }> =
+  await new PrintableShellCommand("npm", [
+    "pack",
+    "--json",
+    "--ignore-scripts",
+    ["--pack-destination", tempDir],
+  ])
+    .print()
+    .json();
+
+const firstEntry: { filename: string } = (() => {
+  if (Array.isArray(data)) {
+    return data[0];
+  }
+  return Object.values(data)[0];
+})();
+
+const tgzPath = tempDir.join(firstEntry.filename);
 await new PrintableShellCommand("tar", [
   ["-C", extractionDir],
   ["-xvzf", tgzPath],
