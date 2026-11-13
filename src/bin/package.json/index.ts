@@ -492,11 +492,30 @@ field(["exports"], "object", {
   mustBePopulatedMessage:
     "Must be populated if `.main` or `.types` are populated.",
 });
+const noLinkedDependencies = {
+  "No linked dependencies": (v: Record<string, string>): boolean => {
+    for (const value of Object.values(v)) {
+      if (value.startsWith("link:")) {
+        return false;
+      }
+    }
+    return true;
+  },
+};
 field(["bin"], "object", { optional: true });
-field(["dependencies"], "object", { optional: true });
+field(["dependencies"], "object", {
+  optional: true,
+  additionalChecks: noLinkedDependencies,
+});
 field(["devDependencies"], "object", { optional: true });
-field(["optionalDependencies"], "object", { optional: true });
-field(["peerDependencies"], "object", { optional: true });
+field(["optionalDependencies"], "object", {
+  optional: true,
+  additionalChecks: noLinkedDependencies,
+});
+field(["peerDependencies"], "object", {
+  optional: true,
+  additionalChecks: noLinkedDependencies,
+});
 field(["peerDependenciesMeta"], "object", { optional: true });
 field(["bundleDependencies"], "object", { optional: true });
 field(["devEngines"], "object", { optional: true });
